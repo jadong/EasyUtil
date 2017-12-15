@@ -3,7 +3,7 @@
     android:id="@+id/splash_content_v"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:src="@mipmap/splash_1"
+    android:src="@mipmap/splash"
     android:scaleType="fitXY">
 
 </ImageView>

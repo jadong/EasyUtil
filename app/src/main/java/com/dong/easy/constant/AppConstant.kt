@@ -8,6 +8,7 @@ import android.os.Environment
  */
 object AppConstant {
 
+    val BAIDU_IMAGE_BASE_URL = "http://image.baidu.com/"
     val SERVER_BASE_URL = "http://172.19.32.73:9001/" //服务端host
     val SDCARD_DIR: String = Environment.getExternalStorageDirectory().path
     val CRASH_LOG_PATH = "$SDCARD_DIR/EasyApp/CrashLog/"

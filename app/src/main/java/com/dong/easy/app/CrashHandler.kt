@@ -11,6 +11,7 @@ import android.os.Environment
 import android.os.Looper
 import android.util.Log
 import com.dong.easy.constant.AppConstant
+import com.dong.easy.util.UIUtils
 import java.io.File
 import java.io.FileOutputStream
 import java.io.PrintWriter
@@ -86,7 +87,7 @@ private constructor() : Thread.UncaughtExceptionHandler {
         object : Thread() {
             override fun run() {
                 Looper.prepare()
-                AppUtils.showLongToast("很抱歉,程序出现异常,即将退出.")
+                UIUtils.showLongToast("很抱歉,程序出现异常,即将退出.")
                 Looper.loop()
             }
         }.start()

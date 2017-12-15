@@ -2,6 +2,7 @@ package com.dong.easy.app
 
 import android.app.Application
 import android.content.Context
+import com.alexvasilkov.gestures.internal.GestureDebug
 
 /**
  *
@@ -17,6 +18,8 @@ class EasyApplication : Application() {
         super.onCreate()
 
         appContext = this
+        GestureDebug.setDebugFps(true)
+        GestureDebug.setDebugAnimator(true)
 
         //全局异常捕获
         CrashHandler.Companion.instance.init(this)

@@ -5,13 +5,11 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/pagerToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
         app:contentInsetStart="0dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
         app:titleTextColor="@color/white">
 
         <TextView
@@ -22,23 +20,23 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:text="@string/app_name"
+            android:text="xxx"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="16dp" />
 
     </android.support.v7.widget.Toolbar>
 
-    <Button
-        android:id="@+id/btn_scan"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:layout_marginTop="151dp"
-        android:text="扫描" />
-
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/pagerToolbar"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_image"
+        app:fabSize="normal" />
 
 </RelativeLayout>

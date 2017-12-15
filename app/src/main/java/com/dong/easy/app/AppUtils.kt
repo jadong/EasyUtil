@@ -13,14 +13,6 @@ import java.io.File
  */
 object AppUtils {
 
-    fun showShortToast(message: String) {
-        Toast.makeText(EasyApplication.appContext, message, Toast.LENGTH_SHORT).show()
-    }
-
-    fun showLongToast(message: String) {
-        Toast.makeText(EasyApplication.appContext, message, Toast.LENGTH_LONG).show()
-    }
-
     /**
      * 安装apk
      */

@@ -14,13 +14,24 @@ open abstract class BaseActivity : AppCompatActivity() {
         beforeSetContentView()
         setContentView(getContentView())
 
-        toolbar = findViewById(R.id.toolbar) as Toolbar
-        toolbar?.setNavigationOnClickListener {
-            finish()
+        val view = findViewById(R.id.toolbar)
+        if (view != null) {
+            toolbar = view as Toolbar
+            if (isShowBack()) {
+                toolbar!!.setNavigationOnClickListener {
+                    finish()
+                }
+            }else{
+                toolbar!!.setNavigationIcon(0)
+            }
         }
 
         initData()
 
+    }
+
+    open fun isShowBack(): Boolean {
+        return true
     }
 
     /**
