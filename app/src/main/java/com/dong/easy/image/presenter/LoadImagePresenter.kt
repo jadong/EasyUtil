@@ -2,8 +2,8 @@ package com.dong.easy.image.presenter
 
 import android.util.Log
 import com.dong.easy.BuildConfig
-import com.dong.easy.base.BasePresenter
 import com.dong.easy.constant.AppConstant
+import com.dong.easy.image.api.LoadImageApi
 import com.dong.easy.image.view.IImageLoadView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -33,7 +33,7 @@ class LoadImagePresenter {
         params["tn"] = "resultjson"
         params["pn"] = "" + ((page - 1) * pageSize)
         params["rn"] = "" + pageSize
-        buildRetrofit().create(ILoadImage::class.java).loadImageList(params)
+        buildRetrofit().create(LoadImageApi::class.java).loadImageList(params)
                 .subscribeOn(Schedulers.io())
                 .timeout(12, TimeUnit.SECONDS)
                 .unsubscribeOn(Schedulers.io())

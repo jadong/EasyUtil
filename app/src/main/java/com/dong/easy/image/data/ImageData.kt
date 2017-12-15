@@ -59,9 +59,4 @@ class ImageData : Serializable {
     @SerializedName("width")
     val width: Int = -1
 
-    var viewWidth: Int = 0
-    var viewHeight: Int = 0
-    var viewLeft: Int = 0
-    var viewTop: Int = 0
-
 }
