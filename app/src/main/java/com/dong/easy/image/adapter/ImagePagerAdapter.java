@@ -40,6 +40,10 @@ public class ImagePagerAdapter extends RecyclePagerAdapter<BigImageViewHolder> {
         addData(dataList);
     }
 
+    public ImageData getImageData(int position){
+        return this.dataList.get(position);
+    }
+
     /**
      * 为了防止ViewPager持有views 而不是显示
      * 假设没有item在这个适配器 activated=false

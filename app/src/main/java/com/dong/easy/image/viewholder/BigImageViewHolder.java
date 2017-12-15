@@ -141,14 +141,14 @@ public class BigImageViewHolder extends RecyclePagerAdapter.ViewHolder implement
 
     @Override
     public boolean onSingleTapUp(@NonNull MotionEvent event) {
-        if (controller != null) {
-            controller.onExitImagePager();
-        }
         return false;
     }
 
     @Override
     public boolean onSingleTapConfirmed(@NonNull MotionEvent event) {
+        if (controller != null) {
+            controller.onExitImagePager();
+        }
         return false;
     }
 
