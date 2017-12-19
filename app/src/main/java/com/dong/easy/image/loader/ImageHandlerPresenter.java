@@ -51,16 +51,18 @@ public class ImageDownloadPresenter extends BasePresenter<IDownloadView> {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                LogUtil.e("ImageDownloadPresenter", "onFailure--" + e.getMessage());
                 if (getView() != null) {
                     getView().downloadFailure();
                 }
+
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
                 String absolutePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
-                File dirFile = new File(absolutePath, "EasySearch");
+                File dirFile = new File(absolutePath);
                 dirFile.mkdirs();
                 String imageFileName = System.currentTimeMillis() + suffix;
                 File imageFile = new File(dirFile, imageFileName);
