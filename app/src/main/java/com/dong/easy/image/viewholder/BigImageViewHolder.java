@@ -1,12 +1,14 @@
 package com.dong.easy.image.viewholder;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.alexvasilkov.gestures.GestureController;
 import com.alexvasilkov.gestures.animation.ViewPositionAnimator;
@@ -23,6 +25,7 @@ import com.dong.easy.glide.GlideImageTarget;
 import com.dong.easy.image.data.ImageData;
 import com.dong.easy.image.listener.ImagePagerController;
 import com.dong.easy.util.Views;
+import com.github.ybq.android.spinkit.style.Circle;
 
 /**
  * 🌑🌒🌓🌔🌕🌖🌗🌘
@@ -33,7 +36,7 @@ public class BigImageViewHolder extends RecyclePagerAdapter.ViewHolder implement
     private static final long PROGRESS_DELAY = 300L;
 
     public GestureImageView gestureImageView;
-    private View progress;
+    private ProgressBar progress;
 
     private boolean gesturesDisabled;
 
@@ -44,7 +47,9 @@ public class BigImageViewHolder extends RecyclePagerAdapter.ViewHolder implement
 
         gestureImageView = Views.find(itemView, R.id.photo_full_image);
         progress = Views.find(itemView, R.id.photo_full_progress);
-
+        Circle circle = new Circle();
+        circle.setColor(Color.parseColor("#8a2be2"));
+        progress.setIndeterminateDrawable(circle);
         gestureImageView.getController().getSettings()
                 .setRotationEnabled(true)
                 .setRestrictRotation(true)
