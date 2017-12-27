@@ -39,4 +39,17 @@
         android:src="@drawable/ic_image"
         app:fabSize="normal" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_show_chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/pagerToolbar"
+        android:layout_marginLeft="150dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_show_chart"
+        app:fabSize="normal" />
+
 </RelativeLayout>

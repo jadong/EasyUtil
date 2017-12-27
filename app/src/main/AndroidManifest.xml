@@ -41,6 +41,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity android:name=".chart.ShowChartActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

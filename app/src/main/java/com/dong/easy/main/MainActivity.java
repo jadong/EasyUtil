@@ -6,7 +6,9 @@ import android.view.View;
 
 import com.dong.easy.R;
 import com.dong.easy.base.BaseActivity;
+import com.dong.easy.chart.ShowChartActivity;
 import com.dong.easy.image.ImageListActivity;
+import com.dong.easy.util.Views;
 
 /**
  * 🌑🌒🌓🌔🌕🌖🌗🌘
@@ -15,6 +17,7 @@ import com.dong.easy.image.ImageListActivity;
 public class MainActivity extends BaseActivity {
 
     private FloatingActionButton btn_image;
+    private FloatingActionButton btn_show_chart;
 
     @Override
     public int getContentView() {
@@ -23,11 +26,19 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        btn_image = (FloatingActionButton) findViewById(R.id.btn_image);
+        btn_image = Views.find(this,R.id.btn_image);
+        btn_show_chart = Views.find(this,R.id.btn_show_chart);
         btn_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ImageListActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_show_chart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ShowChartActivity.class);
                 startActivity(intent);
             }
         });
