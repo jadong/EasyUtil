@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="
+人在迷惑的时候，往往会有许多心结打不开，这通常都是因为自己钻牛角尖，固执己见，听不进别人的逆耳忠言所致。所以当我们遭遇不顺、陷入烦恼的时候，无论迷惑、愚痴或邪见，只要不执着，就有办法化解。
+
+所谓“穷则变，变则通”，能够不断寻求解决之道，就会有所觉悟，有了觉悟就会有受用，此即“迷中不执着，悟中有受用。”"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="切换字体" />
+
+
+</LinearLayout>
