@@ -28,8 +28,11 @@ public class ImageListAdapter extends DefaultEndlessRecyclerAdapter<RecyclerView
         if (dataList == null) {
             return;
         }
+        int startPos = getCount() - 1;
+        startPos = startPos < 0 ? 0 : startPos;
         this.dataList.addAll(dataList);
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
+        notifyItemRangeChanged(startPos, dataList.size());
     }
 
     public void setData(List<ImageData> dataList) {

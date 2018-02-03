@@ -17,5 +17,6 @@ public class ShowChartActivity extends BaseActivity {
     @Override
     public void initData() {
 
+
     }
 }

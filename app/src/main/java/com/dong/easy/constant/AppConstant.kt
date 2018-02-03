@@ -13,5 +13,6 @@ object AppConstant {
     val SDCARD_DIR: String = Environment.getExternalStorageDirectory().path
     val CRASH_LOG_PATH = "$SDCARD_DIR/EasyApp/CrashLog/"
     val DOWNLOAD_PATH = "$SDCARD_DIR/EasyApp/Download/" //文件下载目录
+    val FONTS_PATH = "$SDCARD_DIR/EasyApp/fonts/" //字体目录
 
 }

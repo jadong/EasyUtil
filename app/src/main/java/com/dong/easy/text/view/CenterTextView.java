@@ -1,13 +1,13 @@
-package com.dong.view3;
+package com.dong.easy.text.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 /**
  * 🌑🌒🌓🌔🌕🌖🌗🌘
@@ -33,18 +33,29 @@ public class CenterTextView extends android.support.v7.widget.AppCompatTextView 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        initView();
+        init();
     }
 
-    private void initView() {
+    private void init() {
         mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setTextSize(getTextSize());
         mTextPaint.setColor(getCurrentTextColor());
-        mStaticLayout = new StaticLayout(getText(), mTextPaint, getWidth(), Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, false);
+        mStaticLayout = new StaticLayout(getText(), mTextPaint, getWidth(), Layout.Alignment.ALIGN_CENTER, 1.0f, 15.0f, false);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         mStaticLayout.draw(canvas);
+    }
+
+    @Override
+    public void setTypeface(Typeface tf) {
+        if (mTextPaint!= null && mTextPaint.getTypeface() != tf) {
+            mTextPaint.setTypeface(tf);
+            if (mStaticLayout != null) {
+                requestLayout();
+                invalidate();
+            }
+        }
     }
 }

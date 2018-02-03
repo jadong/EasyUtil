@@ -8,6 +8,7 @@ import com.dong.easy.R;
 import com.dong.easy.base.BaseActivity;
 import com.dong.easy.chart.ShowChartActivity;
 import com.dong.easy.image.ImageListActivity;
+import com.dong.easy.text.ChangeFontActivity;
 import com.dong.easy.util.Views;
 
 /**
@@ -38,7 +39,7 @@ public class MainActivity extends BaseActivity {
         btn_show_chart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ShowChartActivity.class);
+                Intent intent = new Intent(MainActivity.this, ChangeFontActivity.class);
                 startActivity(intent);
             }
         });

@@ -4,49 +4,48 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.dong.easy.chart.entity.ColumnEntity;
+import com.dong.easy.chart.entity.PointEntity;
+import com.dong.easy.chart.entity.SmallBall;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
- * 排序动画演示
  * 🌑🌒🌓🌔🌕🌖🌗🌘
  * Created by zengwendong on 2017/12/26.
  */
-public class SortAnimView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
+public class LogicView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
     private SurfaceHolder surfaceHolder;
     private boolean isDrawing = false;
     private Canvas canvas;
     private Paint paint;
-    private ColumnEntity[] columnEntities;
     private Random random = new Random();
-    private Handler handler = new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(Message msg) {
-            drawing();
-        }
-    };
+    private List<SmallBall> smallBalls = new ArrayList<>();
 
-    public SortAnimView(Context context) {
+    private SensorManager sensorManager;
+
+    public LogicView(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
-    public SortAnimView(Context context, AttributeSet attrs) {
+    public LogicView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
-    private void init() {
+    private void init(Context context) {
         surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
         //画笔
@@ -57,17 +56,23 @@ public class SortAnimView extends SurfaceView implements SurfaceHolder.Callback,
 //        paint.setStrokeJoin(Paint.Join.ROUND);
 //        paint.setStrokeCap(Paint.Cap.ROUND);
 
-        int len = 30;
-        columnEntities = new ColumnEntity[len];
-        for (int i = 0; i < len; i++) {
-            Rect rect = new Rect();
-            rect.top = 150 + random.nextInt(330);//(len - i) * 10;
-            rect.left = 100 + i * 30;
-            rect.right = 120 + i * 30;
-            rect.bottom = 500;
+        sensorManager = (SensorManager) context.getSystemService(context.SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager.registerListener(new SensorEventListener() {
 
-            columnEntities[i] = new ColumnEntity(rect);
-        }
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                SmallBall.ax = -event.values[0] / 16;
+                SmallBall.ay = event.values[1] / 16;
+                SmallBall.az = -event.values[2] / 16;
+
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        }, sensor, SensorManager.SENSOR_DELAY_GAME);
 
     }
 
@@ -89,29 +94,44 @@ public class SortAnimView extends SurfaceView implements SurfaceHolder.Callback,
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP:
+                smallBalls.add(new SmallBall(getRandomColor(), (int) event.getX(), (int) event.getY()));
+                drawing();
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+    private int getRandomColor() {
+        return random.nextInt() % 0xff000000;
+    }
+
+    @Override
     public void run() {
-        drawing();
-
-        insertSort2();
-
-//        insertSort();
-
-//        selectSort();
+        while (isDrawing) {
+            drawing();
+        }
     }
 
     private void drawing() {
 
         try {
+
             canvas = surfaceHolder.lockCanvas();
             if (canvas == null) {
                 return;
             }
-            canvas.drawColor(Color.WHITE);
 
-            for (int i = 0; i < columnEntities.length; i++) {
-                paint.setColor(columnEntities[i].paintColor);
-                columnEntities[i].paintColor = Color.RED;
-                canvas.drawRect(columnEntities[i].rect, paint);
+            canvas.drawColor(Color.WHITE);
+            for (int i = 0; i < smallBalls.size(); i++) {
+                SmallBall smallBall = smallBalls.get(i);
+                smallBall.drawAndMove(canvas);
             }
 
 
@@ -121,105 +141,15 @@ public class SortAnimView extends SurfaceView implements SurfaceHolder.Callback,
             }
         }
 
-    }
+        sleep();
 
-    private void selectSort() {
-        int len = columnEntities.length;
-
-        for (int i = 0; i < len; i++) {
-            int min = i;
-            for (int j = i + 1; j < len; j++) {
-                if (less(j, min)) {
-                    min = j;
-                }
-            }
-
-            exchange(i, min);
-            drawing();
-            sleep();
-        }
-    }
-
-    private void insertSort() {
-
-        int len = columnEntities.length;
-
-        for (int i = 0; i < len; i++) {
-            for (int j = i; j > 0 && less(j, j - 1); j--) {
-                exchange(j, j - 1);
-                drawing();
-                sleep();
-            }
-        }
-    }
-
-    public void insertSort2() {
-        int len = columnEntities.length;
-        for (int i = 1; i < len; i++) {
-
-            int temp = columnEntities[i].rect.top;
-
-            int j;
-            for (j = i; j > 0 && temp > columnEntities[j - 1].rect.top; j--) {
-                columnEntities[j].rect.top = columnEntities[j - 1].rect.top;
-                columnEntities[j].paintColor = Color.BLUE;
-                drawing();
-                sleep();
-            }
-
-            columnEntities[j].rect.top = temp;
-            columnEntities[j].paintColor = Color.BLUE;
-            drawing();
-            sleep();
-        }
-    }
-
-    private void shellSort() {
-        int len = columnEntities.length;
-
-        int h = 1;// h有序
-        int z = 3;
-
-        //递增序列
-        while (h < len / z) {
-            h *= z + 1;
-        }
-
-        while (h >= 1) {
-            for (int i = h; i < len; i++) {
-                for (int j = i; j >= h && less(j, j - h); j -= h) {
-                    exchange(j, j - h);
-                    drawing();
-                    sleep();
-                }
-            }
-            h /= z;
-        }
     }
 
     private void sleep() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(15);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
-    private boolean less(int index1, int index2) {
-        Rect rect1 = columnEntities[index1].rect;
-        Rect rect2 = columnEntities[index2].rect;
-        if (rect1.top > rect2.top) {
-            return true;
-        }
-        return false;
-    }
-
-    public void exchange(int index1, int index2) {
-        columnEntities[index2].paintColor = Color.BLUE;
-        columnEntities[index1].paintColor = Color.GREEN;
-        int top = columnEntities[index1].rect.top;
-        columnEntities[index1].rect.top = columnEntities[index2].rect.top;
-        columnEntities[index2].rect.top = top;
-    }
-
 }

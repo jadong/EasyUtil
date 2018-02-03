@@ -1,4 +1,4 @@
-package com.jm.android.jumei.tools;
+package com.dong.easy.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -67,7 +67,7 @@ public class MD5Util {
     public static final String md5(final String s) {
 		try {
 			// Create MD5 Hash
-			MessageDigest digest = java.security.MessageDigest
+			MessageDigest digest = MessageDigest
 					.getInstance("MD5");
 			digest.update(s.getBytes());
 			byte messageDigest[] = digest.digest();
