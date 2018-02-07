@@ -5,6 +5,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.dong.easy.app.EasyApplication
+import java.util.*
 
 
 object UIUtils {
@@ -60,6 +61,19 @@ object UIUtils {
             imm.hideSoftInputFromWindow(view.windowToken, 0) //强制隐藏键盘
         }
 
+    }
+
+    fun randomColor(): String {
+        val random = Random()
+        var r = Integer.toHexString(random.nextInt(256)).toUpperCase()
+        var g = Integer.toHexString(random.nextInt(256)).toUpperCase()
+        var b = Integer.toHexString(random.nextInt(256)).toUpperCase()
+
+        r = if (r.length === 1) "0" + r else r
+        g = if (g.length === 1) "0" + g else g
+        b = if (b.length === 1) "0" + b else b
+
+        return "#" + r + g + b
     }
 
 

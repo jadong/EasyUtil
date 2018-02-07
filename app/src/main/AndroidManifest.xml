@@ -48,6 +48,10 @@
         <activity
             android:name=".text.ChangeFontActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".video.VideoActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

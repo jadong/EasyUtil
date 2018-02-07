@@ -46,6 +46,12 @@ android {
         }
 
     }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 dependencies {
@@ -70,5 +76,7 @@ dependencies {
     compile project(':transitionAnim')
 
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
+
+    compile(name:'ijkplayer-release', ext:'aar')
 
 }

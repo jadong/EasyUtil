@@ -10,6 +10,7 @@ import com.dong.easy.chart.ShowChartActivity;
 import com.dong.easy.image.ImageListActivity;
 import com.dong.easy.text.ChangeFontActivity;
 import com.dong.easy.util.Views;
+import com.dong.easy.video.VideoActivity;
 
 /**
  * 🌑🌒🌓🌔🌕🌖🌗🌘
@@ -27,8 +28,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        btn_image = Views.find(this,R.id.btn_image);
-        btn_show_chart = Views.find(this,R.id.btn_show_chart);
+        btn_image = Views.find(this, R.id.btn_image);
+        btn_show_chart = Views.find(this, R.id.btn_show_chart);
         btn_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +42,13 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ChangeFontActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        Views.find(this, R.id.btn_video).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, VideoActivity.class));
             }
         });
     }
