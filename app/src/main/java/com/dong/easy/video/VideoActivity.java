@@ -20,7 +20,7 @@ public class VideoActivity extends BaseActivity {
     private static final float MIN_SCALE = 0.75f;
     private static final float MIN_ALPHA = 0.75f;
 
-    private int currentPosition = 0;
+    private int lastPosition = 0;
 
     @Override
     public void beforeSetContentView() {
@@ -50,13 +50,22 @@ public class VideoActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 Log.i("VideoActivity", "---onPageSelected--" + position);
-                if (currentPosition < position) {
-                    currentPosition = position;
+                videoFragmentAdapter.getFragment(lastPosition).startPlay();
+                if (lastPosition < position) {
+                    //下个页面提前播放
                     VideoFragment videoFragment = videoFragmentAdapter.getNextFragment(position);
                     if (videoFragment != null) {
-                        videoFragment.startPlay();
+                        videoFragment.preLoading();
                     }
+                } else if (lastPosition > position) {
+                    //上个页面停止播放
+//                    VideoFragment videoFragment = videoFragmentAdapter.getFragment(lastPosition);
+//                    if (videoFragment != null) {
+//                        videoFragment.stopPlay();
+//                    }
                 }
+
+                lastPosition = position;
             }
 
             @Override
@@ -70,15 +79,18 @@ public class VideoActivity extends BaseActivity {
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                VideoFragment nextFragment = videoFragmentAdapter.getNextFragment(currentPosition);
+                videoFragmentAdapter.getFragment(lastPosition).startPlay();
+
+                //下一个提前加载
+                VideoFragment nextFragment = videoFragmentAdapter.getNextFragment(lastPosition);
                 if (nextFragment != null) {
-                    nextFragment.startPlay();
+                    nextFragment.preLoading();
                 }
             }
-        }, 1000);
+        }, 500);
 
-        verticalViewPager.setPageMargin(UIUtils.INSTANCE.dip2px(16));
-        verticalViewPager.setPageMarginDrawable(new ColorDrawable(getResources().getColor(android.R.color.holo_green_dark)));
+        //verticalViewPager.setPageMargin(UIUtils.INSTANCE.dip2px(16));
+        //verticalViewPager.setPageMarginDrawable(new ColorDrawable(getResources().getColor(android.R.color.holo_green_dark)));
 
     }
 }

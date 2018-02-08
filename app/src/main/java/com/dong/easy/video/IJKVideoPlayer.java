@@ -28,21 +28,15 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 /**
  * 普通的视频播放器
- * Created by GuoShaoHong on 2017/7/25.
+ * Created by zengwendong on 2018/2/5.
  */
 
-public class VideoPlayerIJK extends FrameLayout {
+public class IJKVideoPlayer extends FrameLayout {
 
     private final String TAG = "VideoPlayerIJK";
 
-    /**
-     * 由ijkplayer提供，用于播放视频，需要给他传入一个surfaceView
-     */
     private IMediaPlayer mMediaPlayer = null;
 
-    /**
-     * 视频文件地址
-     */
     private String videoUrl = "";
 
     private SurfaceView surfaceView;
@@ -68,17 +62,17 @@ public class VideoPlayerIJK extends FrameLayout {
         }
     };
 
-    public VideoPlayerIJK(@NonNull Context context) {
+    public IJKVideoPlayer(@NonNull Context context) {
         super(context);
         initVideoView(context);
     }
 
-    public VideoPlayerIJK(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public IJKVideoPlayer(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initVideoView(context);
     }
 
-    public VideoPlayerIJK(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public IJKVideoPlayer(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initVideoView(context);
     }
@@ -155,8 +149,8 @@ public class VideoPlayerIJK extends FrameLayout {
         }
         //给mediaPlayer设置视图
         mMediaPlayer.setDisplay(surfaceView.getHolder());
-
         mMediaPlayer.prepareAsync();
+
     }
 
     /**
@@ -176,6 +170,8 @@ public class VideoPlayerIJK extends FrameLayout {
             @Override
             public void onPrepared(IMediaPlayer iMediaPlayer) {
                 Log.i(TAG, "-----onPrepared");
+                mMediaPlayer.start();
+                mMediaPlayer.seekTo(0);
                 handler.sendEmptyMessageDelayed(UPDATE_SEEK_BAR, UPDATE_TIME);
             }
         });
@@ -214,6 +210,7 @@ public class VideoPlayerIJK extends FrameLayout {
             @Override
             public void onCompletion(IMediaPlayer iMediaPlayer) {
                 Log.i(TAG, "-----onCompletion");
+                seekBar.setMax(100);
             }
         });
 
@@ -228,7 +225,7 @@ public class VideoPlayerIJK extends FrameLayout {
         });
 
 //        //开启硬解码
-        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
+        //ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
 
         mMediaPlayer = ijkMediaPlayer;
 

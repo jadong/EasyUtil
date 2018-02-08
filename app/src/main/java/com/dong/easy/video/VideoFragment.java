@@ -1,6 +1,7 @@
 package com.dong.easy.video;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -10,8 +11,6 @@ import android.view.ViewGroup;
 
 import com.dong.easy.R;
 import com.dong.easy.util.UIUtils;
-
-import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 /**
  * 🌑🌒🌓🌔🌕🌖🌗🌘
@@ -23,7 +22,7 @@ public class VideoFragment extends Fragment {
 
     private String bgColor = "";
 
-    private VideoPlayerIJK video_player;
+    private IJKVideoPlayer video_player;
 
     private String[] urlArr = {
             "http://jmvideo.jumei.com/MTk1NDM_E/MTUxNzA2MzgyMTA0NQ_E_E/MTU4MzEyNg_E_E/anVtZWkubXA0_default.mp4",
@@ -68,12 +67,12 @@ public class VideoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_video, container, false);
 //        RelativeLayout rl_root_view = (RelativeLayout) rootView.findViewById(R.id.rl_root_view);
 //        rl_root_view.setBackgroundColor(Color.parseColor(bgColor));
-        video_player = (VideoPlayerIJK) rootView.findViewById(R.id.video_player);
+        video_player = (IJKVideoPlayer) rootView.findViewById(R.id.video_player);
 
         rootView.findViewById(R.id.btn_play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VideoFragment.this.startPlay();
+                startPlay();
             }
         });
 
@@ -88,7 +87,18 @@ public class VideoFragment extends Fragment {
         }
     }
 
-    public void start(){
+    public void stopPlay() {
+        video_player.stop();
+    }
+
+    public void preLoading() {
+        startPlay();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //video_player.pause();
+            }
+        }, 500);
     }
 
     @Override

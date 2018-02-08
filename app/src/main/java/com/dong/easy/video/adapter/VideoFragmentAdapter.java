@@ -34,8 +34,12 @@ public class VideoFragmentAdapter extends FragmentPagerAdapter {
         return fragmentList.size();
     }
 
-    public VideoFragment getNextFragment(int currPos) {
-        int next = currPos + 1;
+    public VideoFragment getFragment(int position) {
+        return fragmentList.get(position);
+    }
+
+    public VideoFragment getNextFragment(int position) {
+        int next = position + 1;
         if (next < getCount()) {
             return fragmentList.get(next);
         }
