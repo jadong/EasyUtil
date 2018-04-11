@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
         Views.find(this, R.id.btn_video).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, VideoActivity.class));
+                startActivity(new Intent(MainActivity.this, TestAnimActivity.class));
             }
         });
     }

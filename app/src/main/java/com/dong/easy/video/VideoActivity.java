@@ -40,7 +40,7 @@ public class VideoActivity extends BaseActivity {
 
         final VideoFragmentAdapter videoFragmentAdapter = new VideoFragmentAdapter(getSupportFragmentManager());
         verticalViewPager.setAdapter(videoFragmentAdapter);
-        verticalViewPager.setOffscreenPageLimit(videoFragmentAdapter.getCount());
+        verticalViewPager.setOffscreenPageLimit(5);
         verticalViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

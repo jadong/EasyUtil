@@ -7,9 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.alexvasilkov.gestures.animation.ViewPositionAnimator;
@@ -32,6 +34,8 @@ import com.dong.easy.image.viewholder.BigViewPagerHolder;
 import com.dong.easy.util.UIUtils;
 import com.dong.easy.util.Views;
 import com.dong.easy.view.LoadMoreRecyclerView;
+import com.dong.easy.view.PullRefreshHeader;
+import com.dong.easy.view.SuperSwipeRefreshLayout;
 
 /**
  * 🌑🌒🌓🌔🌕🌖🌗🌘
@@ -42,6 +46,8 @@ public class ImageListActivity extends BaseActivity implements IImageLoadView,
         ImagePagerController,
         ViewPositionAnimator.PositionUpdateListener {
 
+//    private SuperSwipeRefreshLayout superSwipeRefreshLayout;
+//    private PullRefreshHeader pullRefreshHeader;
     private LoadMoreRecyclerView recyclerView;
     private SearchView searchView;
 
@@ -67,6 +73,7 @@ public class ImageListActivity extends BaseActivity implements IImageLoadView,
 
         setSearchView();
 
+//        superSwipeRefreshLayout = Views.find(this, R.id.superSwipeRefreshLayout);
         recyclerView = Views.find(this, R.id.recyclerView);
 
         //设置item之间的间隔
@@ -85,6 +92,28 @@ public class ImageListActivity extends BaseActivity implements IImageLoadView,
     }
 
     private void initRecyclerView() {
+
+//        pullRefreshHeader = new PullRefreshHeader(this);
+//        superSwipeRefreshLayout.setHeaderView(pullRefreshHeader.getView());
+//        superSwipeRefreshLayout.setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                pullRefreshHeader.refreshing();
+//                page = 1;
+//                presenter.loadImageList(page);
+//            }
+//
+//            @Override
+//            public void onPullDistance(int distance) {
+//
+//            }
+//
+//            @Override
+//            public void onPullEnable(boolean enable) {
+//                pullRefreshHeader.pullEnable(enable);
+//            }
+//        });
+
 
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         //recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -236,6 +265,7 @@ public class ImageListActivity extends BaseActivity implements IImageLoadView,
     public void refreshImageData(ImageDataResult imageDataResult) {
 
         if (page == 1) {
+//            superSwipeRefreshLayout.setRefreshing(false);
             imageListAdapter.setData(imageDataResult.getData());
             imagePagerAdapter.setData(imageDataResult.getData());
             recyclerView.scrollToPosition(0);

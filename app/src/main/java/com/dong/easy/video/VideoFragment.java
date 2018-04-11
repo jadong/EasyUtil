@@ -96,9 +96,9 @@ public class VideoFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //video_player.pause();
+                video_player.stop();
             }
-        }, 500);
+        }, 100);
     }
 
     @Override

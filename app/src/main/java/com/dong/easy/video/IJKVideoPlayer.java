@@ -149,6 +149,7 @@ public class IJKVideoPlayer extends FrameLayout {
         }
         //给mediaPlayer设置视图
         mMediaPlayer.setDisplay(surfaceView.getHolder());
+        mMediaPlayer.setScreenOnWhilePlaying(true);
         mMediaPlayer.prepareAsync();
 
     }
@@ -218,7 +219,7 @@ public class IJKVideoPlayer extends FrameLayout {
         ijkMediaPlayer.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
-                Log.i(TAG, "-----onError");
+                Log.i(TAG, "-----onError--" + i + "---" + i1);
                 handler.removeMessages(UPDATE_SEEK_BAR);
                 return false;
             }
