@@ -1,8 +1,14 @@
 package com.dong.easy.pager;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -24,6 +30,13 @@ public class ViewPagerActivity extends BaseActivity {
     private ImagePagerAdapter imagePagerAdapter;
     private ImageButton v_back;
     private TextView tv_title;
+    private TextView tv_title_1;
+    private FrameLayout ll_title_layout;
+    private View view_title_bg;
+
+    private AppBarLayout appbar;
+
+    private CollapsingToolbarLayout collapsing_toolbar;
 
     @Override
     public int getContentView() {
@@ -33,15 +46,44 @@ public class ViewPagerActivity extends BaseActivity {
     @Override
     public void initData() {
         AppUitl.fullScreen(this);
+        collapsing_toolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+        v_back = (ImageButton) findViewById(R.id.v_back);
+        ll_title_layout = (FrameLayout) findViewById(R.id.ll_title_layout);
+        view_title_bg = findViewById(R.id.view_title_bg);
+        tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title_1 = (TextView) findViewById(R.id.tv_title_1);
+        appbar = (AppBarLayout) findViewById(R.id.appbar);
         imagePagerAdapter = new ImagePagerAdapter(this);
-
+        collapsing_toolbar.setContentScrimResource(R.mipmap.title_bg);
         Glide.with(this).asBitmap().load(imagePagerAdapter.getImageList().get(0)).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                 float scale = (float) resource.getHeight() / resource.getWidth();
                 int defaultHeight = (int) (scale * UIUtils.INSTANCE.getScreenWidth());
                 initViewPager(defaultHeight);
+            }
+        });
+
+        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+
+//                Log.i("ViewPager", "verticalOffset=" + verticalOffset + " | getTotalScrollRange =" + appBarLayout.getTotalScrollRange());
+
+                if (appBarLayout.getTotalScrollRange() > 0) {
+                    float alpha = Math.abs(verticalOffset) * 1f / appBarLayout.getTotalScrollRange();
+                    Log.i("ViewPager", "alpha=" + alpha);
+
+                    if (verticalOffset == 0) {//展开
+                        tv_title.setAlpha(0);
+                    } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {//折叠
+                        tv_title.setAlpha(1);
+                    } else {
+                        tv_title.setAlpha(alpha);
+                    }
+                }
+
             }
         });
 
