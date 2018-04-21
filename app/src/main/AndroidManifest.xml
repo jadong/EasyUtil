@@ -56,6 +56,10 @@
         <activity
             android:name=".main.TestAnimActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".pager.ViewPagerActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

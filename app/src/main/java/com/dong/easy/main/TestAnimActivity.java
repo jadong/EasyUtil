@@ -33,6 +33,8 @@ public class TestAnimActivity extends BaseActivity {
                 firstPopRedBagAnim();
             } else if (msg.what == 1) {
                 shrinkRedBagAnim();
+            } else if (msg.what == 2) {
+                hideRedBagAnim();
             }
 
         }
@@ -62,17 +64,23 @@ public class TestAnimActivity extends BaseActivity {
         iv_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isAnimDone) {
+                if (isAnimDone && !isShrinking && !isSmall) {
                     Toast.makeText(TestAnimActivity.this, "领取红包", Toast.LENGTH_SHORT).show();
+                    handler.sendEmptyMessageDelayed(2, 1000);
                 }
             }
         });
     }
 
-    private boolean isSmall = false;
-    private boolean isAnimDone = false;
+    private boolean isSmall = false;//是否变小了
+    private boolean isAnimDone = false;//动画是否执行完成
+    private boolean isShrinking = false;//=true 正在缩小
 
+    /**
+     * 第一次弹出红包动画
+     */
     private void firstPopRedBagAnim() {
+        isAnimDone = false;
         iv_image.setVisibility(View.VISIBLE);
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(iv_image, "scaleX", 0, 1);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(iv_image, "scaleY", 0, 1);
@@ -89,7 +97,11 @@ public class TestAnimActivity extends BaseActivity {
         animatorSet.start();
     }
 
+    /**
+     * 红包缩小动画
+     */
     private void shrinkRedBagAnim() {
+        isShrinking = true;
         int[] location1 = new int[2];
         iv_image.getLocationOnScreen(location1);
 
@@ -118,6 +130,7 @@ public class TestAnimActivity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 isSmall = true;
+                isShrinking = false;
                 iv_small_image.setVisibility(View.VISIBLE);
                 iv_image.setVisibility(View.INVISIBLE);
                 resetAnim(tX, tY, scale);
@@ -126,6 +139,9 @@ public class TestAnimActivity extends BaseActivity {
         animatorSet.start();
     }
 
+    /**
+     * 还原红包动画
+     */
     private void resetAnim(float tX, float tY, float scale) {
 
         ObjectAnimator objectAnimatorX = ObjectAnimator.ofFloat(iv_image, "translationX", tX, 0);
@@ -145,6 +161,9 @@ public class TestAnimActivity extends BaseActivity {
         animatorSet.start();
     }
 
+    /**
+     * 放大红包动画
+     */
     private void popRedBagAnim() {
         iv_image.setVisibility(View.VISIBLE);
         iv_small_image.setVisibility(View.GONE);
@@ -177,6 +196,24 @@ public class TestAnimActivity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 isAnimDone = true;
+                isSmall = false;
+            }
+        });
+        animatorSet.start();
+    }
+
+    private void hideRedBagAnim() {
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(iv_image, "scaleX", 1, 0);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(iv_image, "scaleY", 1, 0);
+        ObjectAnimator alphaAnim = ObjectAnimator.ofFloat(iv_image, "alpha", 1, 0);
+
+        final AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.setDuration(500);
+        animatorSet.playTogether(scaleX, scaleY, alphaAnim);
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                iv_image.setVisibility(View.GONE);
             }
         });
         animatorSet.start();
