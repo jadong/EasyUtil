@@ -22,6 +22,7 @@ import com.alexvasilkov.gestures.transition.ViewsTransitionAnimator;
 import com.alexvasilkov.gestures.transition.ViewsTransitionBuilder;
 import com.dong.easy.R;
 import com.dong.easy.base.BaseActivity;
+import com.dong.easy.image.adapter.CCStaggeredGridLayoutManager;
 import com.dong.easy.image.adapter.ImageListAdapter;
 import com.dong.easy.image.adapter.ImagePagerAdapter;
 import com.dong.easy.image.data.ImageDataResult;
@@ -115,7 +116,7 @@ public class ImageListActivity extends BaseActivity implements IImageLoadView,
 //        });
 
 
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new CCStaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         //recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         imageListAdapter = new ImageListAdapter(this);

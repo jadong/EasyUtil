@@ -1,6 +1,7 @@
 package com.dong.easy.image.viewholder;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -33,7 +34,19 @@ public class ImageViewHolder extends RecyclerView.ViewHolder {
         return imageView;
     }
 
-    public void initData(ImageData imageData) {
+    public void initData(ImageData imageData,int position) {
+
+        if (position == 0) {
+            imageWidth = UIUtils.INSTANCE.getScreenWidth();
+            StaggeredGridLayoutManager.LayoutParams layoutParamsS = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
+            layoutParamsS.setFullSpan(true);
+            itemView.setLayoutParams(layoutParamsS);
+        } else {
+            imageWidth = (UIUtils.INSTANCE.getScreenWidth() - UIUtils.INSTANCE.dip2px(6f)-UIUtils.INSTANCE.dip2px(18f)) / 3;
+            StaggeredGridLayoutManager.LayoutParams layoutParamsS = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
+            layoutParamsS.setFullSpan(false);
+            itemView.setLayoutParams(layoutParamsS);
+        }
 
         ViewGroup.LayoutParams layoutParams = imageView.getLayoutParams();
         layoutParams.width = imageWidth;

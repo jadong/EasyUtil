@@ -1,6 +1,7 @@
 package com.dong.easy.image.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -56,7 +57,7 @@ public class ImageListAdapter extends DefaultEndlessRecyclerAdapter<RecyclerView
     @Override
     protected void onBindHolder(RecyclerView.ViewHolder holder, final int position) {
         ImageViewHolder imageViewHolder = (ImageViewHolder) holder;
-        imageViewHolder.initData(dataList.get(position));
+        imageViewHolder.initData(dataList.get(position),position);
         imageViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
