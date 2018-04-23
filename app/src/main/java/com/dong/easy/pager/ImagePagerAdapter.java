@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.ImageViewTarget;
+import com.dong.easy.util.BlurUtil;
 import com.dong.easy.util.UIUtils;
 
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class ImagePagerAdapter extends PagerAdapter {
     private Context context;
 
     private int[] heightArr;
+
+    public List<Bitmap> blurBitmapList = new ArrayList<>();
 
     public ImagePagerAdapter(Context context) {
         this.context = context;
@@ -66,6 +69,12 @@ public class ImagePagerAdapter extends PagerAdapter {
                     float scale = (float) bitmap.getHeight() / bitmap.getWidth();
                     heightArr[position] = (int) (scale * UIUtils.INSTANCE.getScreenWidth());
                     imageView.setImageBitmap(bitmap);
+
+                    Bitmap doBlur = BlurUtil.doBlur(bitmap, 20, 10);
+                    if (!blurBitmapList.contains(doBlur)) {
+                        blurBitmapList.add(position, doBlur);
+                    }
+
                 }
             }
         });

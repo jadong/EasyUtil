@@ -2,6 +2,11 @@ package com.dong.easy.pager;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.renderscript.Allocation;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
@@ -18,6 +23,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.dong.easy.R;
 import com.dong.easy.base.BaseActivity;
 import com.dong.easy.util.AppUitl;
+import com.dong.easy.util.BlurUtil;
 import com.dong.easy.util.UIUtils;
 
 /**
@@ -55,12 +61,15 @@ public class ViewPagerActivity extends BaseActivity {
         tv_title_1 = (TextView) findViewById(R.id.tv_title_1);
         appbar = (AppBarLayout) findViewById(R.id.appbar);
         imagePagerAdapter = new ImagePagerAdapter(this);
-        collapsing_toolbar.setContentScrimResource(R.mipmap.title_bg);
+
         Glide.with(this).asBitmap().load(imagePagerAdapter.getImageList().get(0)).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                 float scale = (float) resource.getHeight() / resource.getWidth();
                 int defaultHeight = (int) (scale * UIUtils.INSTANCE.getScreenWidth());
+                Bitmap doBlur = BlurUtil.doBlur(resource, 15, 10);
+                imagePagerAdapter.blurBitmapList.add(0, doBlur);
+                collapsing_toolbar.setContentScrim(new BitmapDrawable(doBlur));
                 initViewPager(defaultHeight);
             }
         });
@@ -118,6 +127,7 @@ public class ViewPagerActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
+                collapsing_toolbar.setContentScrim(new BitmapDrawable(imagePagerAdapter.blurBitmapList.get(position)));
             }
 
             @Override
