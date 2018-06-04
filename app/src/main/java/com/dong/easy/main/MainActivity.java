@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
 import com.dong.easy.R;
+import com.dong.easy.anim.AnimActivity;
 import com.dong.easy.base.BaseActivity;
 import com.dong.easy.chart.ShowChartActivity;
 import com.dong.easy.image.ImageListActivity;
@@ -41,7 +42,7 @@ public class MainActivity extends BaseActivity {
         btn_show_chart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ViewPagerActivity.class);
+                Intent intent = new Intent(MainActivity.this, ShowChartActivity.class);
                 startActivity(intent);
             }
         });
@@ -50,6 +51,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, TestAnimActivity.class));
+            }
+        });
+
+        Views.find(this,R.id.btn_anim).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AnimActivity.class));
             }
         });
     }

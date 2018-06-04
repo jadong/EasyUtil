@@ -2,11 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#80000000"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingTop="50dp"
+    android:paddingRight="20dp">
 
-    <com.dong.easy.chart.view.LogicView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:background="#60FFFFFF"
+        android:orientation="vertical">
+
+        <com.dong.easy.chart.view.TrimTimeView
+            android:id="@+id/trimTimeView"
+            android:layout_width="match_parent"
+            android:layout_height="75dp" />
+
+        <com.dong.easy.chart.view.CustomDragView
+            android:id="@+id/customDragView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trimTimeView"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/btn_drag"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/trimTimeView"
+                android:background="@color/red"
+                android:gravity="center" />
+
+        </com.dong.easy.chart.view.CustomDragView>
+    </RelativeLayout>
 
 
 </LinearLayout>
