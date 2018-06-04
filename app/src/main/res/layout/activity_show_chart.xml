@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:background="#80000000"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingTop="50dp"
-    android:paddingRight="20dp">
+    android:paddingTop="50dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="#60FFFFFF"
         android:orientation="vertical">
 
@@ -37,5 +37,19 @@
         </com.dong.easy.chart.view.CustomDragView>
     </RelativeLayout>
 
+    <HorizontalScrollView
+        android:id="@+id/h_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="#60000000"
+        android:scrollbars="none">
+
+        <com.dong.easy.view.TrimTime2View
+            android:id="@+id/trimTime2View"
+            android:layout_width="match_parent"
+            android:layout_height="75dp" />
+
+    </HorizontalScrollView>
 
 </LinearLayout>

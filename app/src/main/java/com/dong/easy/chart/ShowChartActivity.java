@@ -1,9 +1,12 @@
 package com.dong.easy.chart;
 
+import android.widget.HorizontalScrollView;
+
 import com.dong.easy.R;
 import com.dong.easy.base.BaseActivity;
 import com.dong.easy.chart.view.CustomDragView;
 import com.dong.easy.chart.view.TrimTimeView;
+import com.dong.easy.view.TrimTime2View;
 
 /**
  * 🌑🌒🌓🌔🌕🌖🌗🌘
@@ -30,5 +33,13 @@ public class ShowChartActivity extends BaseActivity {
                 trimTimeView.setSlidingDistance(progress);
             }
         });
+
+        TrimTime2View trimTime2View = (TrimTime2View) findViewById(R.id.trimTime2View);
+//        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) trimTime2View.getLayoutParams();
+//        layoutParams.width = (int) trimTime2View.getTotalWidth();
+//        trimTime2View.setLayoutParams(layoutParams);
+
+        HorizontalScrollView h_scroll_view = (HorizontalScrollView) findViewById(R.id.h_scroll_view);
+
     }
 }
