@@ -89,7 +89,7 @@ public class ImageListActivity extends BaseActivity implements IImageLoadView,
 
         presenter = new LoadImagePresenter(this);
 
-        searchView.setQuery("王者荣耀", true);
+        searchView.setQuery("美女", true);
     }
 
     private void initRecyclerView() {

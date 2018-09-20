@@ -9,10 +9,7 @@ import com.dong.easy.anim.AnimActivity;
 import com.dong.easy.base.BaseActivity;
 import com.dong.easy.chart.ShowChartActivity;
 import com.dong.easy.image.ImageListActivity;
-import com.dong.easy.pager.ViewPagerActivity;
-import com.dong.easy.text.ChangeFontActivity;
 import com.dong.easy.util.Views;
-import com.dong.easy.video.VideoActivity;
 
 /**
  * 🌑🌒🌓🌔🌕🌖🌗🌘
