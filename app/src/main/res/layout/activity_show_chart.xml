@@ -60,14 +60,13 @@
         android:layout_marginTop="10dp"
         android:padding="10dp">
 
-        <View
+        <com.dong.easy.view.GestureLineView
             android:id="@+id/view_white_line"
-            android:layout_width="10dp"
-            android:layout_height="30dp"
+            android:layout_width="8dp"
+            android:layout_height="130dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/gradient_vertical_bg" />
+            android:layout_marginBottom="30dp" />
 
         <ImageView
             android:id="@+id/iv_hand_image"

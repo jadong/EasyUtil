@@ -52,7 +52,7 @@ public class ShowChartActivity extends BaseActivity {
         int minHeight = UIUtils.INSTANCE.dip2px(30);
         final int maxHeight = UIUtils.INSTANCE.dip2px(130);
         ValueAnimator animator = ValueAnimator.ofInt(minHeight, maxHeight);
-        animator.setDuration(1000);
+        animator.setDuration(2000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
