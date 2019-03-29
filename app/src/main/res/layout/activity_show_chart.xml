@@ -60,6 +60,7 @@
         android:layout_marginTop="10dp"
         android:padding="10dp">
 
+<<<<<<< HEAD
         <FrameLayout
             android:id="@+id/fl_line"
             android:layout_alignParentBottom="true"
@@ -82,6 +83,15 @@
 
         </FrameLayout>
 
+=======
+        <com.dong.easy.view.GestureLineView
+            android:id="@+id/view_white_line"
+            android:layout_width="8dp"
+            android:layout_height="130dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp" />
+>>>>>>> a857ff5694c3a8fbc2eb213a5850070e621fc070
 
         <ImageView
             android:id="@+id/iv_hand_image"
