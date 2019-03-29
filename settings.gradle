@@ -1,1 +1,7 @@
 include ':app', ':transitionAnim'
+
+//include ':ijkplayer:ijkplayer-java'
+//include ':ijkplayer:ijkplayer-armv7a'
+
+//include ':ijkplayer:ijkplayer-example'
+

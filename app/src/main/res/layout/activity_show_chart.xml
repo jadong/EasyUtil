@@ -60,22 +60,37 @@
         android:layout_marginTop="10dp"
         android:padding="10dp">
 
-        <View
-            android:id="@+id/view_white_line"
-            android:layout_width="10dp"
-            android:layout_height="30dp"
+        <FrameLayout
+            android:id="@+id/fl_line"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/gradient_vertical_bg" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/area_lay"/>
+
+            <View
+                android:id="@+id/view_white_line"
+                android:layout_width="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="130dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/gradient_vertical_bg" />
+
+        </FrameLayout>
+
 
         <ImageView
             android:id="@+id/iv_hand_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="-10dp"
-            android:layout_toRightOf="@+id/view_white_line"
-            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="-15dp"
+            android:layout_toRightOf="@+id/fl_line"
+            android:layout_marginBottom="140dp"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:src="@mipmap/hand_image" />
 

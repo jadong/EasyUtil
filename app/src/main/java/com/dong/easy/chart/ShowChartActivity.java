@@ -2,6 +2,7 @@ package com.dong.easy.chart;
 
 import android.animation.ValueAnimator;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -57,7 +58,7 @@ public class ShowChartActivity extends BaseActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int value = (Integer) animation.getAnimatedValue();
-                RelativeLayout.LayoutParams layoutParams_1 = (RelativeLayout.LayoutParams) view_white_line.getLayoutParams();
+                FrameLayout.LayoutParams layoutParams_1 = (FrameLayout.LayoutParams) view_white_line.getLayoutParams();
                 layoutParams_1.height = value;
                 view_white_line.setLayoutParams(layoutParams_1);
 

@@ -3,6 +3,7 @@ package com.dong.easy.base
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.View
 import com.dong.easy.R
 
 open abstract class BaseActivity : AppCompatActivity() {
@@ -14,9 +15,8 @@ open abstract class BaseActivity : AppCompatActivity() {
         beforeSetContentView()
         setContentView(getContentView())
 
-        val view = findViewById(R.id.toolbar)
-        if (view != null) {
-            toolbar = view as Toolbar
+        toolbar = findViewById(R.id.toolbar)
+        if (toolbar != null) {
             if (isShowBack()) {
                 toolbar!!.setNavigationOnClickListener {
                     finish()

@@ -63,8 +63,16 @@
         <activity
             android:name=".pager.ViewPagerActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".anim.AnimActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".anim.AnimActivity" />
+
+        <activity
+            android:name=".life.LifeNumbersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.CompressImageActivity"
+            android:screenOrientation="portrait" />
+
+
     </application>
 
 </manifest>

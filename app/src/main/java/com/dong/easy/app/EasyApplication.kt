@@ -10,7 +10,7 @@ import com.alexvasilkov.gestures.internal.GestureDebug
  */
 class EasyApplication : Application() {
 
-    companion object{
+    companion object {
         var appContext: Context? = null
     }
 
@@ -22,7 +22,7 @@ class EasyApplication : Application() {
         GestureDebug.setDebugAnimator(true)
 
         //全局异常捕获
-        CrashHandler.Companion.instance.init(this)
+        CrashHandler.instance.init(this)
     }
 
 }

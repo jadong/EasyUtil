@@ -7,11 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.alexvasilkov.gestures.animation.ViewPositionAnimator;
@@ -35,8 +33,6 @@ import com.dong.easy.image.viewholder.BigViewPagerHolder;
 import com.dong.easy.util.UIUtils;
 import com.dong.easy.util.Views;
 import com.dong.easy.view.LoadMoreRecyclerView;
-import com.dong.easy.view.PullRefreshHeader;
-import com.dong.easy.view.SuperSwipeRefreshLayout;
 
 /**
  * 🌑🌒🌓🌔🌕🌖🌗🌘
@@ -89,7 +85,7 @@ public class ImageListActivity extends BaseActivity implements IImageLoadView,
 
         presenter = new LoadImagePresenter(this);
 
-        searchView.setQuery("美女", true);
+        searchView.setQuery("仙剑", true);
     }
 
     private void initRecyclerView() {
@@ -281,6 +277,7 @@ public class ImageListActivity extends BaseActivity implements IImageLoadView,
 
     public void onBackPressed() {
         if (!onExitImagePager()) {
+            overridePendingTransition(0, 0);
             super.onBackPressed();
         }
     }
